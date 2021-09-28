@@ -1,7 +1,7 @@
 import React from 'react';
 import DrawerMUI from './DrawerMUI';
 import "../styles/Layout.css";
-import ScrollView from "./ScrollView";
+import TableView from "./TableView";
 
 export default function Services() {
     return (
@@ -17,7 +17,7 @@ export default function Services() {
 
                     }} className="child-canvas" text="Add Service" title="New Sevice" component={<h4>Hi</h4>} theme="btn btn-success" />
                 </div>
-                <ScrollView />
+                <TableView />
             </div>
         </div>
 
