@@ -11,10 +11,9 @@ export default function TableView(props) {
     const [services, setServices] = useState([]);
     useEffect((services) => {
 
-        axios.get("admin/services", {
+        axios.get("https://tellarabia.herokuapp.com/admin/services", {
             headers: {
                 'Authorization': window.sessionStorage.getItem("token"),
-
             }
         })
             .then(function (response) {

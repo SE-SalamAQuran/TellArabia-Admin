@@ -46,7 +46,7 @@ export default function Login() {
             password: state.password,
         };
         axios
-            .post("/auth/login/admin", cred)
+            .post("https://tellarabia.herokuapp.com/auth/login/admin", cred)
             .then((res) => {
                 setMessage({
                     type: "alert alert-success",
