@@ -61,7 +61,7 @@ export default function Login() {
                 let thisUser = res.data.currentUser;
                 sessionStorage.setItem("user", JSON.stringify(thisUser));
                 sessionStorage.setItem("refresh", res.data.refresh);
-                setTimeout(() => { }, 2000);
+
                 window.location = "/home";
             })
             .catch((err) => {

@@ -17,8 +17,8 @@ export default function Landing() {
         <div
             style={{
                 backgroundImage: `url(${background})`,
-                backgroundPosition: 'center',
-                backgroundSize: 'cover',
+                backgroundPosition: 'top',
+                backgroundSize: '100% 100%',
                 backgroundRepeat: 'no-repeat',
                 width: '100vw',
                 height: '100vh',
