@@ -1,7 +1,6 @@
 import { React, useState, useEffect } from "react";
 import "../styles/Scroller.css";
 import axios from "axios";
-import { Card } from "react-bootstrap";
 import DrawerMUI from "./DrawerMUI";
 
 
@@ -26,8 +25,12 @@ export default function ServicesGridView() {
     const OrderDetails = (props) => {
         return (
             <div>
-                <h5>Customer: {props.user}</h5>
-                <h6>Phone: {props.phone}</h6>
+                <span>Name: {props.user}</span>
+                <br />
+
+                <span>Phone: {props.phone}</span>
+                <br />
+
                 <span>Country: {props.country}</span>
                 <br />
                 <span>City: {props.city}</span>
@@ -38,40 +41,43 @@ export default function ServicesGridView() {
 
 
     return (
-        <div style={{ marginTop: "1.43rem" }}>
-            <div
-                className="row"
-                style={{
-                    padding: "3rem",
-                }}
-            >
+        <div style={{ marginLeft: "auto", marginRight: "auto", padding: '10px', width: "100%" }} className="container">
+            <div className="row">
                 {orders.map((character) => {
                     return (
+                        <div style={{ marginTop: "1em", padding: '2em' }} className="col-sm">
 
-                        <Card border="light" bg="dark" style={{ width: '18rem', color: "white" }}>
-                            <Card.Header style={{ textAlign: 'center' }}>{character.service}</Card.Header>
-                            <Card.Body>
-                                <Card.Title>{character.subject}</Card.Title>
-                                <Card.Subtitle>Deadline: {character.deadline}</Card.Subtitle>
-                                <Card.Subtitle style={{ marginTop: "0.6em", marginBottom: "0.5rem" }}>Status: {character.status.toLowerCase()}
+                            <div className="card text-white text-center bg-dark mb-3" style={{ maxWidth: '20rem' }}>
+                                <div className="card-header">
+                                    "{character.topic}"
+                                    <br />
 
-                                </Card.Subtitle>
-                                <Card.Text>
-                                    Topic: {character.topic}
+                                </div>
+                                <div style={{ marginTop: '0.6em' }}>
+                                    Service: {character.subject}
+
+                                </div>
+                                <div className="card-subtitle mb-2" style={{ marginTop: '0.6em' }}>Deadline: {character.deadline}</div>
+                                <div className="card-body">
+                                    <div className="card-subtitle" style={{}}>
+                                        Status: {character.status.toLowerCase()}
+                                    </div>
                                     <hr />
-                                    {character.details}
+                                    <p className="card-text">
+                                        {character.details}
+                                    </p>
+                                </div>
+                                <div className="card-footer text-muted">
+                                    <DrawerMUI anchor="left" className="child-canvas" text="Customer details" title="Customer Details" component={<OrderDetails phone={character.user.phone} user={character.user.name} country={character.user.country} city={character.user.city} />} theme="btn btn-outline-light" />
 
-                                </Card.Text>
-
-                            </Card.Body>
-                            <Card.Footer>
-                                <DrawerMUI anchor="left" className="child-canvas" text="Order details" title="User details" component={<OrderDetails phone={character.user.phone} user={character.user.name} country={character.user.country} city={character.user.city} />} theme="btn btn-success" />
-                            </Card.Footer>
-                        </Card>
+                                </div>
+                            </div>
+                        </div>
                     );
                 })}
             </div>
         </div>
+
     )
 }
 

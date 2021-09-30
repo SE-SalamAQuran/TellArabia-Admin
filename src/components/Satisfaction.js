@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import Complaints from './Complaints';
 
 export default function Satisfaction() {
     return (
-        <div>
-            <h1>Satisfaction</h1>
+        <div style={{ textAlign: "center" }}>
+        <Complaints/>
         </div>
     )
 }

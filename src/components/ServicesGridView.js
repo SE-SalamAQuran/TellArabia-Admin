@@ -1,7 +1,6 @@
 import { React, useState, useEffect } from "react";
 import "../styles/Scroller.css";
 import axios from "axios";
-import { Card } from "react-bootstrap";
 
 
 
@@ -26,30 +25,36 @@ export default function ServicesGridView() {
 
 
     return (
-        <div style={{ marginTop: "1.43rem" }}>
-            <div
-                className="row"
-                style={{
-                    padding: "5rem",
-                }}
-            >
+
+
+        <div style={{ marginLeft: "auto", marginRight: "auto", padding: '10px', width: "100%" }} className="container">
+            <div className="row">
                 {services.map((character) => {
                     return (
-                        <Card border="light" style={{ width: '18rem' }}>
-                            <Card.Header>{character.main_category}</Card.Header>
-                            <Card.Body>
-                                <Card.Title>{character.sub_category}</Card.Title>
-                                <Card.Text>
-                                    Price: {character.price}
+                        <div style={{ marginTop: "1em", padding: '2em' }} className="col-sm">
+
+                            <div className="card text-black text-center bg-light mb-3" style={{ maxWidth: '20rem' }}>
+                                <div className="card-header">
+                                    {character.main_category}
+
+                                </div>
+                                <div className="card-subtitle mb-2" style={{ marginTop: '0.6em' }}>{character.sub_category}</div>
+                                <div className="card-body">
+                                    <div className="card-subtitle" style={{}}>
+                                        Price: {character.price}
+                                    </div>
                                     <hr />
-                                    {character.description}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
+                                    <p className="card-text">
+                                        {character.description}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     );
                 })}
             </div>
         </div>
+
     )
 }
 

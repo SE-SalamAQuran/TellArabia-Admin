@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/Layout.css";
+import "../styles/Layout.css";
 
 function onClick() {
     window.location = "/";
@@ -15,7 +15,7 @@ const NotFound = () => (
         <br></br>
         <img
             style={{ marginTop: "2rem" }}
-            className={styles.box}
+            className="box"
             src="https://img.icons8.com/clouds/150/000000/cottage.png"
             alt="house"
         />
