@@ -52,20 +52,18 @@ export default function Complaints() {
                                     <p>Date: {complaint.date}</p>
 
                                     <p className="lead">{complaint.details}</p>
-                                    <p>
-                                        {complaint.order.service} / {complaint.order.subject} / {complaint.order.topic}
-                                    </p>
-                                    <p>Customer name: {complaint.user.name}</p>
-                                    <p> Phone: {complaint.user.phone}</p>
+
+                                    <p>Customer name: {complaint.complainant.name}</p>
+                                    <p> Phone: {complaint.complainant.phone}</p>
                                     <span>Complaint status: </span><span className={changeBadgeColor(complaint.status)}>{complaint.status}</span>
                                 </div>
-                                <div className="col">
+                                {/* <div className="col">
                                     <h3 style={{ marginBottom: "1em" }}>Order Details</h3>
                                     <p>Deadline: {complaint.order.deadline}</p>
                                     <p>Language: {complaint.order.language}</p>
                                     <p>Status: {complaint.order.status}</p>
                                     <p>Confirmed: {!complaint.order.confirmed ? "Yes" : "No"}</p>
-                                </div>
+                                </div> */}
                             </div>
 
                         </div>
