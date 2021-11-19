@@ -35,9 +35,6 @@ export default function Login() {
         });
     }
 
-    function handleButtonDisable() {
-        return state.password.length < 8 ? true : false;
-    }
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -57,8 +54,8 @@ export default function Login() {
                 setShow(true);
 
                 const token = res.data.token;
-                sessionStorage.setItem("token", token);
                 let thisUser = res.data.currentUser;
+                sessionStorage.setItem("token", token);
                 sessionStorage.setItem("user", JSON.stringify(thisUser));
                 sessionStorage.setItem("refresh", res.data.refresh);
 
@@ -86,7 +83,7 @@ export default function Login() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control name="password" onChange={handleChange} value={state.password} type="password" placeholder="Password" />
                 </Form.Group>
-                <Button disabled={handleButtonDisable()} variant="outline-light" type="submit" style={{
+                <Button variant="outline-light" type="submit" style={{
                     display: "block",
                     marginLeft: "auto",
                     marginRight: "auto",

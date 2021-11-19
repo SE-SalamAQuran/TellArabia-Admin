@@ -32,17 +32,15 @@ export default function ServicesGridView() {
                 {services.map((character) => {
                     return (
                         <div style={{ marginTop: "1em", padding: '2em' }} className="col-sm">
-
                             <div className="card text-black text-center bg-light mb-3" style={{ maxWidth: '20rem' }}>
+                                <img class="card-img-top" src={character.image} alt="icon"></img>
                                 <div className="card-header">
-                                    {character.main_category}
+                                    {character.parentCategory['name']}
 
                                 </div>
-                                <div className="card-subtitle mb-2" style={{ marginTop: '0.6em' }}>{character.sub_category}</div>
+                                <div className="card-subtitle mb-2" style={{ marginTop: '0.6em' }}>{character.name}</div>
                                 <div className="card-body">
-                                    <div className="card-subtitle" style={{}}>
-                                        Price: {character.price}
-                                    </div>
+
                                     <hr />
                                     <p className="card-text">
                                         {character.description}

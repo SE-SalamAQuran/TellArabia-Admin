@@ -10,14 +10,18 @@ export default function Services() {
                 <div className="col-md-12">
                     <h1 style={{ textAlign: 'center' }}>Services</h1>
                 </div>
-                <div className="col-md-12 parent-container">
+                <div className="col-md-12">
                     <DrawerMUI style={{
                         display: "block",
                         marginLeft: "1em",
 
-                    }} anchor="right" className="child-canvas" text="Add Service" title="New Sevice" component={<p>New Service Form Goes Here</p>} theme="btn btn-success" />
+                    }} anchor="right" className="child-canvas" text="Add Service" title="New Service" component={<p>New Service Form Goes Here</p>} theme="btn btn-success" />
                 </div>
-                <ServicesGridView />
+                <div className="col-md-12">
+                    <ServicesGridView />
+
+                </div>
+
             </div>
         </div>
 

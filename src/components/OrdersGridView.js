@@ -22,7 +22,21 @@ export default function ServicesGridView() {
             });
     }, []);
 
-    const OrderDetails = (props) => {
+    const OfferDetails = (props) => {
+        return (<div style={{ margin: 'auto' }}>
+            <span>Service: {props.service}</span>
+            <br />
+
+            <span>Title: {props.title}</span>
+            <br />
+
+            <span>Price: {props.price}</span>
+            <br />
+
+            <span>Likes: {props.likes}</span>
+        </div>);
+    }
+    const CustomerDetails = (props) => {
         return (
             <div>
                 <span>Name: {props.user}</span>
@@ -54,12 +68,12 @@ export default function ServicesGridView() {
 
                                 </div>
                                 <div style={{ marginTop: '0.6em' }}>
-                                    Service: {character.subject}
+                                    Service: {character.offer.service['name']}
 
                                 </div>
                                 <div className="card-subtitle mb-2" style={{ marginTop: '0.6em' }}>Deadline: {character.deadline}</div>
                                 <div className="card-body">
-                                    <div className="card-subtitle" style={{}}>
+                                    <div className="card-subtitle">
                                         Status: {character.status.toLowerCase()}
                                     </div>
                                     <hr />
@@ -68,7 +82,8 @@ export default function ServicesGridView() {
                                     </p>
                                 </div>
                                 <div className="card-footer text-muted">
-                                    <DrawerMUI anchor="left" className="child-canvas" text="Customer details" title="Customer Details" component={<OrderDetails phone={character.user.phone} user={character.user.name} country={character.user.country} city={character.user.city} />} theme="btn btn-outline-light" />
+                                    <DrawerMUI anchor="left" className="child-canvas" text="Customer details" title="Customer Details" component={<CustomerDetails phone={character.user.phone} user={character.user.name} country={character.user.country} city={character.user.city} />} theme="btn btn-outline-light btn-block" />
+                                    <DrawerMUI anchor="right" className="child-canvas" text="Offer details" title="Offer Details" component={<OfferDetails price={character.offer.price} title={character.offer.title} likes={character.offer.likes} service={character.offer.service['name']} />} theme="btn btn-outline-light btn-block" />
 
                                 </div>
                             </div>
