@@ -23,7 +23,7 @@ export default function ServicesGridView() {
     }, []);
 
     const OfferDetails = (props) => {
-        return (<div style={{ margin: 'auto' }}>
+        return (<div>
             <span>Service: {props.service}</span>
             <br />
 
@@ -33,7 +33,12 @@ export default function ServicesGridView() {
             <span>Price: {props.price}</span>
             <br />
 
-            <span>Likes: {props.likes}</span>
+            <span>Likes: {props.likes}
+            </span>
+
+            <br />
+
+
         </div>);
     }
     const CustomerDetails = (props) => {
@@ -52,7 +57,22 @@ export default function ServicesGridView() {
         );
     }
 
+    const YesComponent = () => {
+        return (
+            <div>
+                Yes <img src="https://img.icons8.com/fluency/15/000000/verified-account.png" alt="confirmed" />
+            </div>
+        )
+    }
 
+    const NoComponent = () => {
+        return (
+            <div>
+                No <img src="https://img.icons8.com/external-bearicons-outline-color-bearicons/15/000000/external-error-essential-collection-bearicons-outline-color-bearicons.png" alt="not-confirmed" />
+            </div>
+
+        )
+    }
 
     return (
         <div style={{ marginLeft: "auto", marginRight: "auto", padding: '10px', width: "100%" }} className="container">
@@ -62,19 +82,20 @@ export default function ServicesGridView() {
                         <div style={{ marginTop: "1em", padding: '2em' }} className="col-sm">
 
                             <div className="card text-white text-center bg-dark mb-3" style={{ maxWidth: '20rem' }}>
-                                <div className="card-header">
-                                    "{character.topic}"
+                                <div style={{ fontWeight: "bold" }} className="card-header">
+                                    {character.offer.service['name']}
                                     <br />
 
                                 </div>
-                                <div style={{ marginTop: '0.6em' }}>
-                                    Service: {character.offer.service['name']}
 
-                                </div>
-                                <div className="card-subtitle mb-2" style={{ marginTop: '0.6em' }}>Deadline: {character.deadline}</div>
+                                <div className="card-subtitle mb-2" style={{ marginTop: '0.6em' }}><strong>Deadline:</strong> {character.deadline}</div>
                                 <div className="card-body">
                                     <div className="card-subtitle">
-                                        Status: {character.status.toLowerCase()}
+                                        <strong> Status:</strong> {character.status}
+                                        <br />
+                                        <strong>Language:</strong> {character.language}
+                                        <br />
+                                        <strong>Confirmation:</strong> {character.confirmed ? <YesComponent /> : <NoComponent />}
                                     </div>
                                     <hr />
                                     <p className="card-text">

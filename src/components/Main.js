@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import FakeSuspense from './FakeSuspense';
 import { CircularProgress } from '@mui/material';
 import Dashboard from './Dashboard';
@@ -6,20 +6,35 @@ import Orders from "./Orders";
 import ComingSoon from "./ComingSoon";
 import Revenue from "./Revenue";
 import Contracts from "./Contracts";
+import axios from "axios";
 import Services from "./Services";
 import Satisfaction from "./Satisfaction";
 import { Container, Navbar, NavDropdown, Nav, Button } from "react-bootstrap";
 
 
 export default function Main() {
-    const [content, setContent] = useState(<Dashboard />);
-
-
+    const [content, setContent] = useState(<Orders />);
+    const [lookups, setLookups] = useState([]);
     const MenuIcon = (props) => {
         return (<img style={{ marginLeft: "4px" }} src={props.image} alt="icon" />)
     }
 
+    useEffect((lookups) => {
 
+        axios.get("https://tellarabia.herokuapp.com/lookups/all", {
+            headers: {
+                'Authorization': window.sessionStorage.getItem("token"),
+            }
+        })
+            .then(function (response) {
+                console.log(response.data.result);
+                setLookups(response.data.result);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }, []);
+    localStorage.setItem("lookups", JSON.stringify(lookups));
 
 
     function logOut(e) {
@@ -31,23 +46,7 @@ export default function Main() {
     }
 
 
-
-
-    // function Footer() {
-
-    //     return (
-    //         <div style={{ backgroundColor: "GrayText", textAlign: 'center', color: 'white' }}>
-
-    //             <p>CopyRight @TellArabia {new Date().getFullYear()}</p>
-    //         </div>
-    //     )
-
-    // }
-
-
-
-
-    function handleNotificationsClick(e) {
+    function handleOffersClick(e) {
         e.preventDefault();
         setContent(<ComingSoon />);
     }
@@ -105,8 +104,8 @@ export default function Main() {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Button onClick={handleNotificationsClick} style={{ marginLeft: "5px" }} className="btn btn-md btn-outline-dark">Notifications
-                                <MenuIcon image="https://img.icons8.com/external-flatart-icons-flat-flatarticons/25/000000/external-bell-communication-and-media-flatart-icons-flat-flatarticons.png" />
+                            <Button onClick={handleOffersClick} style={{ marginLeft: "5px" }} className="btn btn-md btn-outline-dark">Offers
+                                <MenuIcon image="https://img.icons8.com/external-justicon-flat-justicon/25/000000/external-offer-ecommerce-justicon-flat-justicon-1.png" />
                             </Button>
                             <Button onClick={handleDashboardClick} style={{ marginLeft: "5px" }} className="btn btn-md btn-outline-dark">Dashboard
                                 <MenuIcon image="https://img.icons8.com/color/25/ffffff/dashboard--v1.png" />

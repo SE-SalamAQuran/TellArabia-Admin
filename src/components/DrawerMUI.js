@@ -33,10 +33,13 @@ export default function DrawerMUI(props) {
             >
                 <div style={{ marginRight: "1em", marginLeft: "1em", width: "100%" }}>
                     <h3 style={{ marginTop: "1em" }}>{props.title}</h3>
+
                     <hr />
                     <div style={{ marginTop: "1.5em" }}>
                         {props.component}
-
+                        <div >
+                            <Button className="btn btn-danger" onClick={toggleDrawer(props.anchor, false)}>Exit</Button>
+                        </div>
                     </div>
                 </div>
             </Drawer>
