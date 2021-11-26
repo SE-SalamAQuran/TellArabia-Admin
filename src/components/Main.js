@@ -5,7 +5,7 @@ import Dashboard from './Dashboard';
 import Orders from "./Orders";
 import ComingSoon from "./ComingSoon";
 import Revenue from "./Revenue";
-import Contracts from "./Contracts";
+import Applications from "./Applications";
 import axios from "axios";
 import Services from "./Services";
 import Satisfaction from "./Satisfaction";
@@ -51,7 +51,7 @@ export default function Main() {
         setContent(<ComingSoon />);
     }
 
-    function handleEmployeesClick(e) {
+    function handleFreelancersClick(e) {
         e.preventDefault();
         setContent(<ComingSoon />);
     }
@@ -66,9 +66,9 @@ export default function Main() {
         setContent(<ComingSoon />);
     }
 
-    function handleContractsClick(e) {
+    function handleApplicationsClick(e) {
         e.preventDefault();
-        setContent(<Contracts />);
+        setContent(<Applications />);
     }
 
     function handleRevenueClick(e) {
@@ -121,10 +121,10 @@ export default function Main() {
 
                         </Nav>
                         <Nav className="me-auto">
-                            <Button onClick={handleEmployeesClick} style={{ marginLeft: "5px" }} className="btn btn-md btn-outline-dark">Employees
+                            <Button onClick={handleFreelancersClick} style={{ marginLeft: "5px" }} className="btn btn-md btn-outline-dark">Freelancers
                                 <MenuIcon image="https://img.icons8.com/external-itim2101-lineal-color-itim2101/25/000000/external-employee-human-resource-itim2101-lineal-color-itim2101.png" />
                             </Button>
-                            <Button onClick={handleContractsClick} style={{ marginLeft: "5px" }} className="btn btn-md btn-outline-dark">Contracts
+                            <Button onClick={handleApplicationsClick} style={{ marginLeft: "5px" }} className="btn btn-md btn-outline-dark">Job Applications
                                 <MenuIcon image="https://img.icons8.com/external-becris-lineal-color-becris/25/000000/external-contract-business-situations-becris-lineal-color-becris.png" />
                             </Button>
                             <Button onClick={handleServicesClick} style={{ marginLeft: "5px" }} className="btn btn-md btn-outline-dark">Services

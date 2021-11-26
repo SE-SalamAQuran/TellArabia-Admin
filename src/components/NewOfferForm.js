@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import { Row, Col, Toast, Form } from "react-bootstrap";
 import axios from "axios";
 
-export default function NewServiceForm() {
+export default function NewOfferForm() {
     const [main, setMain] = useState("");
     const [sub, setSub] = useState("");
     const [description, setDescription] = useState("");
@@ -14,15 +14,17 @@ export default function NewServiceForm() {
         header: "",
         text: "",
     });
-    var myArray = JSON.parse(window.localStorage.getItem("lookups"));
-    console.log("Main services", myArray);
-    var main_services = [];
+    var lookupsArray = JSON.parse(window.localStorage.getItem("lookups"));
 
-    for (var i = 0; i < myArray.length; i++) {
-        if (myArray[i].classification === "main_services") {
-            main_services = myArray[i].values;
+    console.log("Main services", lookupsArray);
+    var main_services = [];
+    for (var i = 0; i < lookupsArray.length; i++) {
+        if (lookupsArray[i].classification === "main_services") {
+            main_services = lookupsArray[i].values;
         }
     }
+
+
 
     function handleMainChange(e) {
         setMain(e.target.value);
@@ -46,7 +48,7 @@ export default function NewServiceForm() {
         formData.append("main", main);
         formData.append("sub", sub);
         formData.append("description", description);
-        axios.post("https://tellarabia.herokuapp.com/services/new", formData, {
+        axios.post("https://tellarabia.herokuapp.com/offers/new", formData, {
             headers: {
                 'Authorization': window.sessionStorage.getItem("token"),
             }

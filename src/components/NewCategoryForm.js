@@ -40,14 +40,15 @@ export default function NewCategoryForm() {
                     type: "alert alert-success",
                     text: response.data.message
                 });
-                setImage(null);
+
                 setName("");
-            }).catch((res) => {
+            }).catch((err) => {
                 setShow(true);
+                console.log(err);
                 setMessage({
                     header: "Failure",
                     type: "alert alert-danger",
-                    text: res.data.message
+                    text: "Invalid Inputs"
                 });
             });
     }
