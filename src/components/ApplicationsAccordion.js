@@ -51,12 +51,12 @@ export default function ApplicationsAccordion() {
                                         <div className="col">
                                             <p>Freelancer Details</p>
                                             <br></br>
-                                            <ul class="list-group">
-                                                <li class="list-group-item">{character.freelancer['name']}</li>
-                                                <li class="list-group-item">{character.freelancer['phone']}</li>
-                                                <li class="list-group-item">{character.freelancer['city']}</li>
-                                                <li class="list-group-item">{character.freelancer['country']}</li>
-                                                <li class="list-group-item">{character.freelancer['address']}</li>
+                                            <ul className="list-group">
+                                                <li className="list-group-item">{character.freelancer['name']}</li>
+                                                <li className="list-group-item">{character.freelancer['phone']}</li>
+                                                <li className="list-group-item">{character.freelancer['city']}</li>
+                                                <li className="list-group-item">{character.freelancer['country']}</li>
+                                                <li className="list-group-item">{character.freelancer['address']}</li>
                                             </ul>
                                         </div>
                                         <div className="col">

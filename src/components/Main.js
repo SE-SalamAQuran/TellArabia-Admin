@@ -5,11 +5,13 @@ import Dashboard from './Dashboard';
 import Orders from "./Orders";
 import ComingSoon from "./ComingSoon";
 import Revenue from "./Revenue";
+import Freelancers from "./Freelancers";
 import Applications from "./Applications";
 import axios from "axios";
 import Services from "./Services";
 import Satisfaction from "./Satisfaction";
 import { Container, Navbar, NavDropdown, Nav, Button } from "react-bootstrap";
+import Offers from "./Offers";
 
 
 export default function Main() {
@@ -48,12 +50,12 @@ export default function Main() {
 
     function handleOffersClick(e) {
         e.preventDefault();
-        setContent(<ComingSoon />);
+        setContent(<Offers />);
     }
 
     function handleFreelancersClick(e) {
         e.preventDefault();
-        setContent(<ComingSoon />);
+        setContent(<Freelancers />);
     }
 
     function handleDashboardClick(e) {
@@ -104,15 +106,16 @@ export default function Main() {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Button onClick={handleOffersClick} style={{ marginLeft: "5px" }} className="btn btn-md btn-outline-dark">Offers
-                                <MenuIcon image="https://img.icons8.com/external-justicon-flat-justicon/25/000000/external-offer-ecommerce-justicon-flat-justicon-1.png" />
-                            </Button>
                             <Button onClick={handleDashboardClick} style={{ marginLeft: "5px" }} className="btn btn-md btn-outline-dark">Dashboard
                                 <MenuIcon image="https://img.icons8.com/color/25/ffffff/dashboard--v1.png" />
                             </Button>
                             <Button onClick={handleChatsClick} style={{ marginLeft: "5px" }} className="btn btn-md btn-outline-dark">Chats
                                 <MenuIcon image="https://img.icons8.com/external-justicon-lineal-color-justicon/25/000000/external-chat-notifications-justicon-lineal-color-justicon.png" />
                             </Button>
+                            <Button onClick={handleOffersClick} style={{ marginLeft: "5px" }} className="btn btn-md btn-outline-dark">Offers
+                                <MenuIcon image="https://img.icons8.com/external-justicon-flat-justicon/25/000000/external-offer-ecommerce-justicon-flat-justicon-1.png" />
+                            </Button>
+
                             <Button onClick={handleOrdersClick} style={{ marginLeft: "5px" }} className="btn btn-md btn-outline-dark">Orders
                                 <MenuIcon image="https://img.icons8.com/fluency/25/000000/purchase-order.png" />
                             </Button>

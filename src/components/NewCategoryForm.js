@@ -59,12 +59,12 @@ export default function NewCategoryForm() {
     return (
         <div style={{ marginBottom: "2rem" }}>
             <form onSubmit={handleUpload} encType="multipart/form-data">
-                <div class="row">
-                    <div class="col">
-                        <input name="name" value={name} onChange={handleNameChange} type="text" class="form-control" placeholder="Category name"></input>
+                <div className="row">
+                    <div className="col">
+                        <input name="name" value={name} onChange={handleNameChange} type="text" className="form-control" placeholder="Category name"></input>
                     </div>
-                    <div class="col">
-                        <input type="file" name="image" onChange={handleImageChange} class="form-control" placeholder="Image"></input>
+                    <div className="col">
+                        <input type="file" name="image" onChange={handleImageChange} className="form-control" placeholder="Image"></input>
                     </div>
                 </div>
 

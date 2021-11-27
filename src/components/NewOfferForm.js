@@ -3,11 +3,14 @@ import { Row, Col, Toast, Form } from "react-bootstrap";
 import axios from "axios";
 
 export default function NewOfferForm() {
-    const [main, setMain] = useState("");
-    const [sub, setSub] = useState("");
-    const [description, setDescription] = useState("");
-    const [image, setImage] = useState(null);
+    var main_services = [];
+    let sub_services = [];
 
+    const [main, setMain] = useState("");
+    const [price, setPrice] = useState(0);
+    const [description, setDescription] = useState("");
+    const [images, setImages] = useState([]);
+    const [service, setService] = useState("");
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState({
         type: "",
@@ -16,8 +19,8 @@ export default function NewOfferForm() {
     });
     var lookupsArray = JSON.parse(window.localStorage.getItem("lookups"));
 
-    console.log("Main services", lookupsArray);
-    var main_services = [];
+
+
     for (var i = 0; i < lookupsArray.length; i++) {
         if (lookupsArray[i].classification === "main_services") {
             main_services = lookupsArray[i].values;
@@ -25,17 +28,30 @@ export default function NewOfferForm() {
     }
 
 
-
     function handleMainChange(e) {
         setMain(e.target.value);
     }
-    function handleImageChange(e) {
-        if (e.target.files[0]) {
-            setImage(e.target.files[0]);
+
+    function handleImagesChange(e) {
+        if (e.target.files) {
+            let files = e.target.files;
+            setImages(files);
+            console.log("Files", e.target.files.length);
+            console.log("Images", images.length);
         }
     }
-    function handleSubChange(e) {
-        setSub(e.target.value);
+
+    for (var j = 0; j < lookupsArray.length; j++) {
+        if (lookupsArray[j].classification === main.toLowerCase().split(' ').join('_') + '_services') {
+            sub_services = lookupsArray[j].values;
+        }
+    }
+    function handleServiceChange(e) {
+        setService(e.target.value);
+    }
+
+    function handlePriceChange(e) {
+        setPrice(e.target.value);
     }
     function handleDescriptionChange(e) {
         setDescription(e.target.value);
@@ -44,9 +60,11 @@ export default function NewOfferForm() {
     function handleUpload(e) {
         e.preventDefault();
         const formData = new FormData();
-        formData.append("file", image);
-        formData.append("main", main);
-        formData.append("sub", sub);
+        for (let i = 0; i < images.length; i++) {
+            formData.append("images", images[i], images[i].name);
+        }
+        formData.append("service", service);
+        formData.append("price", price.toString() + "$");
         formData.append("description", description);
         axios.post("https://tellarabia.herokuapp.com/offers/new", formData, {
             headers: {
@@ -62,10 +80,10 @@ export default function NewOfferForm() {
                 });
 
                 setDescription("");
-                setMain("");
-                setSub("");
+                setPrice("");
 
-            }).catch((error) => {
+            })
+            .catch((error) => {
                 setShow(true);
                 console.log(error);
                 setMessage({
@@ -86,27 +104,35 @@ export default function NewOfferForm() {
                     <div className="col">
                         <select className="form-control" name="main" onChange={handleMainChange}>
                             {main_services.map((character) => {
-                                return (<option value="{character}">{character}</option>);
+                                return (<option>{character}</option>);
                             })}
                         </select>
-                    </div>
 
+                    </div>
                     <div className="col">
-                        <input name="sub" value={sub} onChange={handleSubChange} type="text" className="form-control" placeholder="Service name"></input>
-                    </div>
+                        <select className="form-control" name="service" onChange={handleServiceChange}>
+                            {sub_services.map((character) => {
+                                return (<option value={character}>{character}</option>);
+                            })}
+                        </select>
 
+                    </div>
                 </div>
                 <div className="row" style={{ marginTop: "1rem" }}>
                     <div className="col">
-                        <input type="file" name="image" onChange={handleImageChange} className="form-control" placeholder="Image"></input>
+                        <input name="price" value={price} onChange={handlePriceChange} type="number" className="form-control" placeholder="Price"></input>
+                    </div>
+                    <div className="col">
+                        <input type="file" name="images" onChange={handleImagesChange} multiple className="form-control" placeholder="Images"
+                        ></input>
                     </div>
                 </div>
                 <div className="row" style={{ marginTop: "1rem" }}>
                     <div className="col">
                         <Form.Control
                             as="textarea"
-                            placeholder="Service Description"
-                            style={{ height: '100px' }}
+                            placeholder="Offer Description"
+                            style={{ height: '200px' }}
                             name="description"
                             value={description}
                             onChange={handleDescriptionChange}

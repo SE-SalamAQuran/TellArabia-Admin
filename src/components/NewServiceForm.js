@@ -84,7 +84,7 @@ export default function NewServiceForm() {
                     <div className="col">
                         <select className="form-control" name="main" onChange={handleMainChange}>
                             {main_services.map((character) => {
-                                return (<option value="{character}">{character}</option>);
+                                return (<option>{character}</option>);
                             })}
                         </select>
                     </div>
