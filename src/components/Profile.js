@@ -1,6 +1,18 @@
 import { React, useState, useEffect } from 'react';
 import axios from "axios";
-import { Button } from "react-bootstrap";
+import { Button, Nav, Navbar } from "react-bootstrap";
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+
+const Item = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+}));
+
 
 export default function Profile() {
 
@@ -52,15 +64,43 @@ export default function Profile() {
     }
     return (
         <div style={{ width: window.innerWidth }}>
-            <button onClick={handleHomeClick} className="btn btn-dark btn-lg">Back to home page</button>
+            {/* <button onClick={handleHomeClick} className="btn btn-dark btn-lg">Back to home page</button>
             <br></br>
-            <Button onClick={logOut} title="Logout" style={{ marginTop: "1rem", marginBottom: "1em" }} className="btn btn-danger btn-md">Logout</Button>
+             */}
+            <Navbar bg="dark" variant="dark" expand="lg">
+                <Navbar.Brand href="#home">Profile page</Navbar.Brand>
+                <Nav className="mr-auto">
+                    <Button onClick={handleHomeClick}>Home</Button>
+
+                </Nav>
+
+                <Nav>
+                    <Button style={{ marginLeft: "0.5em" }} className="btn btn-danger" onClick={logOut}>Logout</Button>
+                </Nav>
+
+            </Navbar>
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2}>
+
+                    <Grid item xs={12} md={6} lg={4}>
+                        <Item>
+                            <img src={info.avatar} alt="avatar" style={{ width: "100%" }}></img>
+                        </Item>
+                    </Grid>
+                    <Grid item xs={12} md={6} lg={4}>
+                        <Item>
+                            <h1>{info.name}</h1>
+                        </Item>
+                    </Grid>
+
+                </Grid>
+            </Box>
+
+
 
             <div style={{ padding: "10px", width: "50%", position: "fixed", right: 0 }}>
-                <img style={{
-                    width: "250px", height: "250px", borderRadius: "70%"
-                }} src={info.avatar} alt="profile pic" />
-                <h1>{info.name}</h1>
+
+
             </div>
         </div >
     )

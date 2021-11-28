@@ -6,7 +6,7 @@ import axios from "axios";
 
 export default function ServicesGridView() {
     const [services, setServices] = useState([]);
-    useEffect((services) => {
+    useEffect(() => {
 
         axios.get("https://tellarabia.herokuapp.com/admin/services", {
             headers: {
@@ -20,7 +20,7 @@ export default function ServicesGridView() {
             .catch(function (error) {
                 console.log(error);
             });
-    }, [])
+    }, [services])
 
 
 

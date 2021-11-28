@@ -2,12 +2,12 @@ import { React, useState, useEffect } from "react";
 import "../styles/Scroller.css";
 import axios from "axios";
 import DrawerMUI from "./DrawerMUI";
+import OrderStatusForm from "./OrderStatusForm";
 
 
 export default function ServicesGridView() {
     const [orders, setOrders] = useState([]);
-    useEffect((orders) => {
-
+    useEffect(() => {
         axios.get("https://tellarabia.herokuapp.com/admin/orders", {
             headers: {
                 'Authorization': window.sessionStorage.getItem("token"),
@@ -20,7 +20,10 @@ export default function ServicesGridView() {
             .catch(function (error) {
                 console.log(error);
             });
-    }, []);
+    }, [orders]);
+
+
+
 
     const OfferDetails = (props) => {
         return (<div>
@@ -103,9 +106,9 @@ export default function ServicesGridView() {
                                     </p>
                                 </div>
                                 <div className="card-footer text-muted">
-                                    <DrawerMUI anchor="left" className="child-canvas" text="Customer details" title="Customer Details" component={<CustomerDetails phone={character.user.phone} user={character.user.name} country={character.user.country} city={character.user.city} />} theme="btn btn-outline-light btn-block" />
+                                    <DrawerMUI anchor="right" className="child-canvas" text="Customer details" title="Customer Details" component={<CustomerDetails phone={character.user.phone} user={character.user.name} country={character.user.country} city={character.user.city} />} theme="btn btn-outline-light btn-block" />
                                     <DrawerMUI anchor="right" className="child-canvas" text="Offer details" title="Offer Details" component={<OfferDetails price={character.offer.price} title={character.offer.title} likes={character.offer.likes} service={character.offer.service['name']} />} theme="btn btn-outline-light btn-block" />
-
+                                    <DrawerMUI anchor="right" className="child-canvas" text="Update Status" title="Update Order Status" component={<OrderStatusForm status={character.status} order={character._id} />} theme="btn btn-light" />
                                 </div>
                             </div>
                         </div>

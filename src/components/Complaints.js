@@ -1,10 +1,12 @@
 import { React, useState, useEffect } from 'react';
 import axios from "axios";
+import DrawerMUI from './DrawerMUI';
+import ComplaintStatusForm from "./ComplaintStatusForm";
 
 export default function Complaints() {
 
     const [complaints, setComplaints] = useState([]);
-    useEffect((complaints) => {
+    useEffect(() => {
 
         axios.get("https://tellarabia.herokuapp.com/admin/complaints", {
             headers: {
@@ -18,7 +20,7 @@ export default function Complaints() {
             .catch(function (error) {
                 console.log(error);
             });
-    }, []);
+    }, [complaints]);
 
 
 
@@ -26,11 +28,11 @@ export default function Complaints() {
     function changeBadgeColor(status) {
         if (status === "Pending") {
             return "badge badge-secondary";
-        } else if (status === "In progress") {
+        } else if (status === "In Progress") {
             return "badge badge-info";
-        } else if (status === "Removed") {
+        } else if (status === "Closed") {
             return "badge badge-danger";
-        } else {
+        } else if (status === "Resolved") {
             return "badge badge-success"
         }
     }
@@ -51,21 +53,18 @@ export default function Complaints() {
                                     </h3>
                                     <p>Date: {complaint.date}</p>
 
-                                    <p className="lead">{complaint.details}</p>
+                                    <p className="lead">"{complaint.details}"</p>
 
                                     <p>Customer name: {complaint.complainant.name}</p>
                                     <p> Phone: {complaint.complainant.phone}</p>
                                     <span>Complaint status: </span><span className={changeBadgeColor(complaint.status)}>{complaint.status}</span>
                                 </div>
-                                {/* <div className="col">
-                                    <h3 style={{ marginBottom: "1em" }}>Order Details</h3>
-                                    <p>Deadline: {complaint.order.deadline}</p>
-                                    <p>Language: {complaint.order.language}</p>
-                                    <p>Status: {complaint.order.status}</p>
-                                    <p>Confirmed: {!complaint.order.confirmed ? "Yes" : "No"}</p>
-                                </div> */}
-                            </div>
 
+                            </div>
+                            <div style={{ marginTop: "1rem" }}>
+                                <DrawerMUI anchor="right" className="child-canvas" text="Update Status" title="Update Complaint Status" component={<ComplaintStatusForm status={complaint.status} complaint={complaint._id} />} theme="btn btn-outline-dark" />
+
+                            </div>
                         </div>
                     </div>
                 );

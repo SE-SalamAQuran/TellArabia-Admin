@@ -27,7 +27,7 @@ const OfferDetails = (props) => {
 export default function OffersView() {
     const [offers, setOffers] = React.useState([]);
 
-    React.useEffect((offers) => {
+    React.useEffect(() => {
 
         axios.get("https://tellarabia.herokuapp.com/offers/all", {
             headers: {
@@ -41,7 +41,7 @@ export default function OffersView() {
             .catch(function (error) {
                 console.log(error);
             });
-    }, [])
+    }, [offers])
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>

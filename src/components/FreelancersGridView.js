@@ -28,7 +28,7 @@ const FreelancerDetails = (props) => {
 export default function FreelancersGridView() {
     const [freelancers, setFreelancers] = React.useState([]);
 
-    React.useEffect((freelancers) => {
+    React.useEffect(() => {
 
         axios.get("https://tellarabia.herokuapp.com/admin/freelancers", {
             headers: {
@@ -42,7 +42,7 @@ export default function FreelancersGridView() {
             .catch(function (error) {
                 console.log(error);
             });
-    }, [])
+    }, [freelancers])
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>

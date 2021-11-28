@@ -14,7 +14,7 @@ export default function ApplicationsAccordion() {
         setExpanded(isExpanded ? panel : false);
     };
 
-    React.useEffect((applications) => {
+    React.useEffect(() => {
         axios.get("https://tellarabia.herokuapp.com/admin/applications", {
             headers: {
                 'Authorization': window.sessionStorage.getItem("token"),
@@ -27,7 +27,7 @@ export default function ApplicationsAccordion() {
             .catch(function (error) {
                 console.log(error);
             });
-    }, [])
+    }, [applications])
 
     return (
         <div style={{ marginTop: "2rem" }}>

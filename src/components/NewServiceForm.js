@@ -3,29 +3,31 @@ import { Row, Col, Toast, Form } from "react-bootstrap";
 import axios from "axios";
 
 export default function NewServiceForm() {
-    const [main, setMain] = useState("");
+    var main_services = [];
+
     const [sub, setSub] = useState("");
     const [description, setDescription] = useState("");
     const [image, setImage] = useState(null);
-
+    const [main, setMain] = useState("");
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState({
         type: "",
         header: "",
         text: "",
     });
-    var myArray = JSON.parse(window.localStorage.getItem("lookups"));
-    console.log("Main services", myArray);
-    var main_services = [];
+    var lookups = JSON.parse(window.localStorage.getItem("lookups"));
 
-    for (var i = 0; i < myArray.length; i++) {
-        if (myArray[i].classification === "main_services") {
-            main_services = myArray[i].values;
+
+    for (var i = 0; i < lookups.length; i++) {
+        if (lookups[i].classification === "main_services") {
+            main_services = lookups[i].values;
         }
     }
 
+
     function handleMainChange(e) {
         setMain(e.target.value);
+        console.log(main);
     }
     function handleImageChange(e) {
         if (e.target.files[0]) {
@@ -83,8 +85,9 @@ export default function NewServiceForm() {
                 <div className="row">
                     <div className="col">
                         <select className="form-control" name="main" onChange={handleMainChange}>
+                            <option>Choose Main Category</option>
                             {main_services.map((character) => {
-                                return (<option>{character}</option>);
+                                return (<option value={character}>{character}</option>);
                             })}
                         </select>
                     </div>
