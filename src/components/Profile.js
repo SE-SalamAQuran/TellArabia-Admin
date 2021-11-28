@@ -97,7 +97,7 @@ export default function Profile() {
                     </Grid>
                     <Grid style={{ height: "100%" }} item xs={12} md={6} lg={4}>
                         <Item>
-                            <img src={info.avatar} alt="avatar" style={{ width: "100%", height: "50%", borderRadius: "50%" }}></img>
+                            <img src={info.avatar} alt="avatar" style={{ width: "50%", height: "50%", borderRadius: "50%" }}></img>
                         </Item>
                         <Item>
                             <DrawerMUI title="Upload New Image" anchor="right" className="child-canvas" text="Change Profile Image" component={<UploadImageForm />} theme="btn btn-outline-info" />
