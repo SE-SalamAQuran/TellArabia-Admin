@@ -33,8 +33,6 @@ export default function MUICard(props) {
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardHeader
-
-
                 title={props.service}
                 subheader={props.date}
             />
@@ -49,8 +47,8 @@ export default function MUICard(props) {
                     {props.title}
                 </Typography>
             </CardContent>
-            <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
+            <CardActions disableSpacing style={{ display: props.displayAll }}>
+                <IconButton aria-label="add to favorites" style={{ display: props.display }}>
                     <FavoriteIcon /> {props.likes}
                 </IconButton>
 
@@ -65,14 +63,14 @@ export default function MUICard(props) {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    <Typography paragraph>Offer Details:</Typography>
+                    <Typography paragraph>{props.detailsTitle}</Typography>
 
                     <Typography paragraph>
                         {props.details}
                     </Typography>
+                    <hr></hr>
 
-
-                    <Typography paragraph>Description:</Typography>
+                    <Typography paragraph>{props.descriptionTitle}</Typography>
 
                     <Typography paragraph>
                         {props.description}

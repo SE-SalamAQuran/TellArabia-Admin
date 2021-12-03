@@ -1,6 +1,16 @@
 import { React, useState, useEffect } from "react";
-import "../styles/Scroller.css";
 import axios from "axios";
+import MUICard from "./MUICard";
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+const Item = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+}));
 
 
 
@@ -26,33 +36,33 @@ export default function ServicesGridView() {
 
     return (
 
+        <div>
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2}>
+                    {services.map((character) => {
+                        return (
+                            <Grid item xs={12} md={6} lg={4}>
+                                <Item><MUICard
+                                    display="none"
+                                    service={character.parentCategory['name']}
+                                    date={character.name}
+                                    image={character.image}
+                                    title={
+                                        <div>
+                                            {character.description}
+                                            <hr></hr>
+                                            Offers: {character.offers.length}
+                                        </div>
+                                    }
+                                    displayAll="none"
 
-        <div style={{ marginLeft: "auto", marginRight: "auto", padding: '10px', width: "100%" }} className="container">
-            <div className="row">
-                {services.map((character) => {
-                    return (
-                        <div key={character._id} style={{ marginTop: "1em", padding: '2em' }} className="col-sm">
-                            <div className="card text-black text-center bg-light mb-3" style={{ maxWidth: '20rem' }}>
-                                <img className="card-img-top" src={character.image} alt="icon"></img>
-                                <div className="card-header">
-                                    {character.parentCategory['name']}
-
-                                </div>
-                                <div className="card-subtitle mb-2" style={{ marginTop: '0.6em' }}>{character.name}</div>
-                                <div className="card-body">
-
-                                    <hr />
-                                    <p className="card-text">
-                                        {character.description}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    );
-                })}
-            </div>
+                                /></Item>
+                            </Grid>
+                        );
+                    })}
+                </Grid>
+            </Box>
         </div>
-
     )
 }
 

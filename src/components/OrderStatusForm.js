@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { Row, Col, Toast } from "react-bootstrap";
 import axios from "axios";
 
@@ -13,8 +13,32 @@ export default function OrderStatusForm(props) {
         header: "",
         text: "",
     });
+
+    const [disable, setDisable] = useState(false);
+
     var lookups = JSON.parse(window.localStorage.getItem("lookups"));
 
+
+    useEffect(() => {
+        if (props.status === "Complete") {
+            setShow(true);
+            setMessage({
+                type: "alert alert-info",
+                text: "Cannot change status when it's complete",
+                header: "Complete Order"
+            });
+            setDisable(true);
+        }
+        else if (props.status === "Removed") {
+            setShow(true);
+            setMessage({
+                type: "alert alert-warning",
+                text: "Cannot change status when it's removed",
+                header: "Removed Order"
+            });
+            setDisable(true);
+        }
+    }, [props.status])
 
     for (var i = 0; i < lookups.length; i++) {
         if (lookups[i].classification === "orders_status_values") {
@@ -74,7 +98,7 @@ export default function OrderStatusForm(props) {
                     </div>
                 </div>
                 <div style={{ marginTop: "1em" }}>
-                    <button type="submit" className="btn btn-success btn-md">Submit</button>
+                    <button disabled={disable} type="submit" className="btn btn-success btn-md">Submit</button>
                 </div>
             </form>
             <Row style={{ marginTop: '2.5rem' }}>

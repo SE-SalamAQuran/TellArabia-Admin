@@ -1,11 +1,11 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { Row, Col, Toast } from "react-bootstrap";
 import axios from "axios";
 
 
 export default function ComplaintStatusForm(props) {
     var statusList = [];
-
+    const [disable, setDisable] = useState(false);
     const [status, setStatus] = useState("");
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState({
@@ -15,6 +15,26 @@ export default function ComplaintStatusForm(props) {
     });
     var lookups = JSON.parse(window.localStorage.getItem("lookups"));
 
+    useEffect(() => {
+        if (props.status === "Resolved") {
+            setShow(true);
+            setMessage({
+                type: "alert alert-info",
+                text: "Cannot change status when it's Resolved",
+                header: "Resolved Complaint"
+            });
+            setDisable(true);
+        }
+        else if (props.status === "Closed") {
+            setShow(true);
+            setMessage({
+                type: "alert alert-warning",
+                text: "Cannot change status when it's closed",
+                header: "Closed Complaint"
+            });
+            setDisable(true);
+        }
+    }, [props.status])
 
     for (var i = 0; i < lookups.length; i++) {
         if (lookups[i].classification === "complaints_status_values") {
@@ -74,7 +94,7 @@ export default function ComplaintStatusForm(props) {
                     </div>
                 </div>
                 <div style={{ marginTop: "1em" }}>
-                    <button type="submit" className="btn btn-success btn-md">Submit</button>
+                    <button disabled={disable} type="submit" className="btn btn-success btn-md">Submit</button>
                 </div>
             </form>
             <Row style={{ marginTop: '2.5rem' }}>

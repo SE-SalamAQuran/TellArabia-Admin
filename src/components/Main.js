@@ -4,12 +4,12 @@ import { CircularProgress } from '@mui/material';
 import Dashboard from './Dashboard';
 import Orders from "./Orders";
 import ComingSoon from "./ComingSoon";
-import Revenue from "./Revenue";
+import Meetings from "./Meetings";
 import Freelancers from "./Freelancers";
 import Applications from "./Applications";
 import axios from "axios";
 import Services from "./Services";
-import Satisfaction from "./Satisfaction";
+import Support from "./Support";
 import { Container, Navbar, NavDropdown, Nav, Button } from "react-bootstrap";
 import Offers from "./Offers";
 
@@ -73,18 +73,18 @@ export default function Main() {
         setContent(<Applications />);
     }
 
-    function handleRevenueClick(e) {
+    function handleMeetingsClick(e) {
         e.preventDefault();
-        setContent(<Revenue />);
+        setContent(<Meetings />);
     }
 
     function handleServicesClick(e) {
         e.preventDefault();
         setContent(<Services />);
     }
-    function handleSatisfactionClick(e) {
+    function handleSupportClick(e) {
         e.preventDefault();
-        setContent(<Satisfaction />);
+        setContent(<Support />);
     }
     function handleOrdersClick(e) {
         e.preventDefault();
@@ -135,15 +135,16 @@ export default function Main() {
                             </Button>
 
 
-                            <NavDropdown style={{ marginLeft: "5px" }} title='Statistics' id="collasible-nav-dropdown">
-                                <NavDropdown.Item onClick={handleRevenueClick}>Revenue
-                                    <MenuIcon image="https://img.icons8.com/external-prettycons-flat-prettycons/25/000000/external-statistics-business-and-finance-prettycons-flat-prettycons.png" />
+                            <NavDropdown style={{ marginLeft: "5px" }} title='Customer Care' id="collasible-nav-dropdown">
+                                <NavDropdown.Item onClick={handleMeetingsClick}>Meetings
+                                    <MenuIcon image="https://img.icons8.com/external-wanicon-flat-wanicon/25/000000/external-meeting-work-at-home-wanicon-flat-wanicon.png" />
 
                                 </NavDropdown.Item>
 
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item onClick={handleSatisfactionClick}>Satisfaction
-                                    <MenuIcon image="https://img.icons8.com/color/25/000000/satisfaction.png" />
+                                <NavDropdown.Item onClick={handleSupportClick}>Support
+
+                                    <MenuIcon image="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/25/000000/external-support-online-shopping-vitaliy-gorbachev-lineal-color-vitaly-gorbachev-2.png" />
                                 </NavDropdown.Item>
                             </NavDropdown>
                         </Nav>

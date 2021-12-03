@@ -1,11 +1,22 @@
 import { React, useState, useEffect } from "react";
-import "../styles/Scroller.css";
 import axios from "axios";
 import DrawerMUI from "./DrawerMUI";
 import OrderStatusForm from "./OrderStatusForm";
+import MUICard from "./MUICard";
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+
+const Item = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+}));
 
 
-export default function ServicesGridView() {
+export default function OrdersGridView() {
     const [orders, setOrders] = useState([]);
     useEffect(() => {
         axios.get("https://tellarabia.herokuapp.com/admin/orders", {
@@ -26,20 +37,13 @@ export default function ServicesGridView() {
 
 
     const OfferDetails = (props) => {
-        return (<div>
-            <span>Service: {props.service}</span>
-            <br />
-
-            <span>Title: {props.title}</span>
-            <br />
-
-            <span>Price: {props.price}</span>
-            <br />
-
-            <span>Likes: {props.likes}
-            </span>
-
-            <br />
+        return (<div style={{ marginBottom: "1em" }}>
+            <ul className="list-group">
+                <li className="list-group-item">Title: {props.title}</li>
+                <li className="list-group-item">Price: {props.price}</li>
+                <li className="list-group-item">Likes: {props.likes}</li>
+                <li className="list-group-item">Orders: {props.orders}</li>
+            </ul>
 
 
         </div>);
@@ -47,15 +51,13 @@ export default function ServicesGridView() {
     const CustomerDetails = (props) => {
         return (
             <div>
-                <span>Name: {props.user}</span>
-                <br />
+                <ul className="list-group">
+                    <li className="list-group-item">Name: {props.user}</li>
+                    <li className="list-group-item">Country: {props.country}</li>
+                    <li className="list-group-item">City: {props.city}</li>
+                    <li className="list-group-item">Phone: {props.phone}</li>
+                </ul>
 
-                <span>Phone: {props.phone}</span>
-                <br />
-
-                <span>Country: {props.country}</span>
-                <br />
-                <span>City: {props.city}</span>
             </div>
         );
     }
@@ -77,44 +79,66 @@ export default function ServicesGridView() {
         )
     }
 
-    return (
-        <div style={{ marginLeft: "auto", marginRight: "auto", padding: '10px', width: "100%" }} className="container">
-            <div className="row">
-                {orders.map((character) => {
-                    return (
-                        <div style={{ marginTop: "1em", padding: '2em' }} className="col-sm">
+    const OrderDetails = (props) => {
+        return (
+            <div>
+                <p>{props.title}</p>
+                <p>Confirmation: {props.confirmation ? <YesComponent /> : <NoComponent />} </p>
+                <p>Status: {props.status}</p>
 
-                            <div className="card text-white text-center bg-dark mb-3" style={{ maxWidth: '20rem' }}>
-                                <div style={{ fontWeight: "bold" }} className="card-header">
-                                    {character.offer.service['name']}
-                                    <br />
-
-                                </div>
-
-                                <div className="card-subtitle mb-2" style={{ marginTop: '0.6em' }}><strong>Deadline:</strong> {character.deadline}</div>
-                                <div className="card-body">
-                                    <div className="card-subtitle">
-                                        <strong> Status:</strong> {character.status}
-                                        <br />
-                                        <strong>Language:</strong> {character.language}
-                                        <br />
-                                        <strong>Confirmation:</strong> {character.confirmed ? <YesComponent /> : <NoComponent />}
-                                    </div>
-                                    <hr />
-                                    <p className="card-text">
-                                        {character.details}
-                                    </p>
-                                </div>
-                                <div className="card-footer text-muted">
-                                    <DrawerMUI anchor="right" className="child-canvas" text="Customer details" title="Customer Details" component={<CustomerDetails phone={character.user.phone} user={character.user.name} country={character.user.country} city={character.user.city} />} theme="btn btn-outline-light btn-block" />
-                                    <DrawerMUI anchor="right" className="child-canvas" text="Offer details" title="Offer Details" component={<OfferDetails price={character.offer.price} title={character.offer.title} likes={character.offer.likes} service={character.offer.service['name']} />} theme="btn btn-outline-light btn-block" />
-                                    <DrawerMUI anchor="right" className="child-canvas" text="Update Status" title="Update Order Status" component={<OrderStatusForm status={character.status} order={character._id} />} theme="btn btn-light" />
-                                </div>
-                            </div>
-                        </div>
-                    );
-                })}
             </div>
+        );
+    }
+
+    return (
+        <div>
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2}>
+                    {orders.map((character) => {
+                        return (
+                            <Grid item xs={12} md={6} lg={4}>
+                                <Item><MUICard
+                                    display="none"
+                                    service={character.offer.service['name']}
+                                    date={"Deadline:" + character.deadline}
+                                    title={
+                                        <OrderDetails
+                                            title={character.details}
+                                            confirmation={character.confirmed}
+                                            status={character.status}
+                                        />
+                                    }
+
+                                    detailsTitle="Customer Details"
+                                    descriptionTitle="Offer Description"
+                                    description={
+                                        <div>
+                                            <OfferDetails
+                                                price={character.offer.price}
+                                                title={character.offer.title}
+                                                likes={character.offer.likes}
+                                                orders={character.offer.orders.length}
+                                            />
+                                            <DrawerMUI anchor="right" className="child-canvas" text="Update Status" title="Update Order Status" component={<OrderStatusForm status={character.status} order={character._id} />} theme="btn btn-dark" />
+
+
+                                        </div>
+                                    }
+                                    details={
+                                        <CustomerDetails
+                                            country={character.user['country']}
+                                            city={character.user['city']}
+                                            phone={character.user['phone']}
+                                            user={character.user['name']}
+                                        />
+
+                                    }
+                                /></Item>
+                            </Grid>
+                        );
+                    })}
+                </Grid>
+            </Box>
         </div>
 
     )

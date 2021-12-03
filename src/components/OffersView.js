@@ -43,18 +43,21 @@ export default function OffersView() {
             });
     }, [offers])
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2}>
-                {offers.map((character) => {
-                    return (
-                        <Grid item xs={12} md={6} lg={4}>
-                            <Item><MUICard service={character.service['name']} date={character.createdAt.slice(0, 10)} description={character.description} image={character.images[Math.floor(Math.random() * character.images.length)]} likes={character.likes} title={character.title} details={<OfferDetails price={character.price} orders={character.orders.length} />} /></Item>
-                        </Grid>
-                    );
-                })}
+        <div>
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2}>
+                    {offers.map((character) => {
+                        return (
+                            <Grid item xs={12} md={6} lg={4}>
+                                <Item><MUICard detailsTitle="Offer Details:" descriptionTitle="Description" service={character.service['name']} date={character.createdAt.slice(0, 10)} description={character.description} image={character.images[Math.floor(Math.random() * character.images.length)]} likes={character.likes} title={character.title} details={<OfferDetails price={character.price} orders={character.orders.length} />} /></Item>
+                            </Grid>
+                        );
+                    })}
 
 
-            </Grid>
-        </Box>
+                </Grid>
+            </Box>
+        </div>
+
     );
 }

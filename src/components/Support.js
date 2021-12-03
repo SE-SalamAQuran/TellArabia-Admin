@@ -1,10 +1,10 @@
 import React from 'react';
+import Complaints from './Complaints';
 
-export default function Dashboard() {
+export default function Support() {
     return (
         <div style={{ textAlign: "center" }}>
-            <h1>Dashboard</h1>
-            <p>Coming Soon</p>
+            <Complaints />
         </div>
     )
 }
