@@ -9,6 +9,7 @@ import Freelancers from "./Freelancers";
 import Applications from "./Applications";
 import axios from "axios";
 import Services from "./Services";
+import Students from "./Students";
 import Support from "./Support";
 import { Container, Navbar, NavDropdown, Nav, Button } from "react-bootstrap";
 import Offers from "./Offers";
@@ -91,6 +92,11 @@ export default function Main() {
         setContent(<Orders />);
     }
 
+    function handleStudentsClick(e) {
+        e.preventDefault();
+        setContent(<Students />);
+    }
+
 
 
 
@@ -146,8 +152,14 @@ export default function Main() {
 
                                     <MenuIcon image="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/25/000000/external-support-online-shopping-vitaliy-gorbachev-lineal-color-vitaly-gorbachev-2.png" />
                                 </NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item onClick={handleStudentsClick}>Students
+
+                                    <MenuIcon image="https://img.icons8.com/external-inipagistudio-mixed-inipagistudio/25/000000/external-student-health-education-inipagistudio-mixed-inipagistudio.png" />
+                                </NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
+
                         <Nav>
                             <Nav.Link style={{ marginLeft: '1em', textAlign: 'center' }} title="profile" eventKey={2} href="/profile">
                                 <MenuIcon image="https://img.icons8.com/color/25/000000/user.png" /> Profile
