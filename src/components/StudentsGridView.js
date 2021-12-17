@@ -35,21 +35,6 @@ export default function StudentsGridView() {
     }, [students]);
 
 
-
-
-    // const OfferDetails = (props) => {
-    //     return (<div style={{ marginBottom: "1em" }}>
-    //         <ul className="list-group">
-    //             <li className="list-group-item">Title: {props.title}</li>
-    //             <li className="list-group-item">Price: {props.price}</li>
-    //             <li className="list-group-item">Likes: {props.likes}</li>
-    //             <li className="list-group-item">Orders: {props.orders}</li>
-    //         </ul>
-
-
-    //     </div>);
-    // }
-
     const YesComponent = () => {
         return (
             <div>
