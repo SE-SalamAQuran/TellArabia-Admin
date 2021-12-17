@@ -17,16 +17,7 @@ export default function StudentPointsForm(props) {
 
     function handleUpdate(e) {
         e.preventDefault();
-        if (points < 0) {
-            setShow(true);
-            setMessage({
-                header: "Failure",
-                type: "alert alert-danger",
-                text: "Invalid Points"
-            });
-            return;
-        }
-
+        
         const data = {
             studentID: props.student,
             points: points
